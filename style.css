@@ -118,3 +118,15 @@ body{
 .category-btn {
   background: transparent;
 }
+
+/* media */
+
+@media (max-width: 900px){
+  .navbar{
+    display: block;
+    height: 30%;
+  }
+  .nav-list{
+    flex-direction: column;
+  }
+}
