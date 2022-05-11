@@ -1,18 +1,35 @@
-const url = "https://capsules-asb6.herokuapp.com/api/teacher/mordi";
-// const url = "https://capsules-asb6.herokuapp.com/api/user/018";
+//url of all person and individual
+const urlAll = "https://capsules-asb6.herokuapp.com/api/teacher/mordi";
+const urlPerson = `https://capsules-asb6.herokuapp.com/api/user/`;
 
-// async function fetchData(url) {
-//   const api = await fetch(url);
-//   const data = await api.json();
-//   return data;
-// }
+//fetch data by url
+async function fetchData(url, id) {
+  const api = await fetch(url + id);
+  if (!api.ok) throw new Error("My error faild to fetch ");
+  const data = await api.json();
+  //   console.log(data);
+  return data;
+}
 
-// fetchData(url);
+// fetchData(urlAll, "");
+// fetchData(urlPerson, "1102");
 
-// fetch(url).then((data) => console.log(data));
+const tableObj = {
+  personnel: [],
+};
 
-const arr = ["חיים", "בנא", "שגב"];
-arr.sort();
-console.log(arr);
+async function pushDataToObject(obj, url1, url2) {
+  const allPersonArr = await fetchData(url1, "");
 
-// segev
+  for (const person of allPersonArr) {
+    const personOne = await fetchData(url2, person.id);
+    const personKeys = Object.keys(personOne);
+    personKeys.forEach((key) => {
+      person[key] = personOne[key];
+    });
+  }
+  obj.personnel = allPersonArr;
+  console.log(obj.personnel);
+}
+
+pushDataToObject(tableObj, urlAll, urlPerson);
