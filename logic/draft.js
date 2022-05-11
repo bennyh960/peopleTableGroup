@@ -15,17 +15,6 @@ async function fetchData(url, id) {
   return data;
 }
 
-<<<<<<< segev
-// fetchData(urlAll, "");
-// fetchData(urlPerson, "1102");
-const some= 'this line need to be dleeted';
-
-const tableObj = {
-  personnel: [],
-};
-
-=======
->>>>>>> main
 async function pushDataToObject(obj, url1, url2) {
   const allPersonArr = await fetchData(url1, "");
   const personOneArr = await Promise.all(allPersonArr.map((person) => fetchData(url2, person.id)));
@@ -42,4 +31,4 @@ async function pushDataToObject(obj, url1, url2) {
   // console.log(obj.personnel);
 }
 
-// pushDataToObject(tableObj, urlAll, urlPerson);
+pushDataToObject(tableObj, urlAll, urlPerson);
