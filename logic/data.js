@@ -15,7 +15,7 @@ async function fetchData(url, id) {
   return data;
 }
 
-async function pushDataToObject(obj, url1, url2) {
+export async function pushDataToObject(obj, url1, url2) {
   const allPersonArr = await fetchData(url1, "");
   const personOneArr = await Promise.all(allPersonArr.map((person) => fetchData(url2, person.id)));
 
@@ -32,3 +32,6 @@ async function pushDataToObject(obj, url1, url2) {
 }
 
 // pushDataToObject(tableObj, urlAll, urlPerson);
+export function abc(params) {
+  console.log("bla");
+}
