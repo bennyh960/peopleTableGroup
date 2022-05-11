@@ -13,6 +13,7 @@ async function fetchData(url, id) {
 
 // fetchData(urlAll, "");
 // fetchData(urlPerson, "1102");
+const some= 'this line need to be dleeted';
 
 const tableObj = {
   personnel: [],
