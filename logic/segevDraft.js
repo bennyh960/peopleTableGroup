@@ -31,37 +31,52 @@ async function pushDataToObject(obj, url1, url2) {
   console.log(obj.personnel);
 }
 
-pushDataToObject(tableObj, urlAll, urlPerson).then(()=>{
-  drawTable(tableObj) 
-})
+pushDataToObject(tableObj, urlAll, urlPerson).then(() => {
+  drawTable(tableObj);
+});
 
 function drawTable(obj) {
-  const tableContainer = document.querySelector('.table-container')
-  obj.personnel.forEach((person)=>{ // create rows
-    const personRow = document.createElement('div')
-    personRow.classList.add('row')
-    tableContainer.appendChild(personRow)
+  const tableContainer = document.querySelector(".table-container");
+  obj.personnel.forEach((person, idx) => {
+    // create rows
+    const personRow = document.createElement("div");
+    personRow.classList.add("row");
+    tableContainer.appendChild(personRow);
     // create inputs
     for (let i = 0; i < Math.min(8, Object.keys(person).length); i++) {
-      const tableCell = document.createElement('input')
-      tableCell.value = person[Object.keys(person)[i]]
+      const tableCell = document.createElement("input");
+      tableCell.value = person[Object.keys(person)[i]];
       tableCell.disabled = true;
-      tableCell.classList.add('table-cell')
-      personRow.appendChild(tableCell)
+      tableCell.classList.add("table-cell");
+      personRow.appendChild(tableCell);
     }
     // create btn
-    const buttonsContainer = document.createElement('div')
-    const buttonEdit = document.createElement('button')
-    const buttonDelete = document.createElement('button')
-    buttonsContainer.classList.add('buttons-container')
-    buttonEdit.classList.add('edit')
-    buttonDelete.classList.add('delete')
-    buttonEdit.innerText = 'Edit';
-    buttonDelete.innerText = 'Delete';
-    personRow.appendChild(buttonsContainer)
-    buttonsContainer.append(buttonEdit,buttonDelete)
-  })
+    const buttonsContainer = document.createElement("div");
+    const buttonEdit = document.createElement("button");
+    const buttonDelete = document.createElement("button");
+    buttonsContainer.classList.add("buttons-container");
+    buttonEdit.classList.add("edit");
+    buttonDelete.classList.add("delete");
+    buttonEdit.innerText = "Edit";
+    buttonDelete.innerText = "Delete";
+    personRow.appendChild(buttonsContainer);
+    buttonsContainer.append(buttonEdit, buttonDelete);
+  });
+  const editBtns = document.querySelectorAll(".edit");
+  editBtns.forEach((edit, idx) => {
+    edit.addEventListener("click", () => {
+      editFunc(idx);
+    });
+  });
 }
 
-
-
+//! need to improve the Enter eventlistner
+async function editFunc(idx) {
+  const rowContainers = document.querySelectorAll(".row");
+  [...rowContainers[idx].children].forEach((cell) => {
+    cell.disabled = false;
+    document.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") cell.disabled = true;
+    });
+  });
+}
