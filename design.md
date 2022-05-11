@@ -35,3 +35,24 @@
 
 Design each methods should start with all team
 Add method to person object ?
+
+///
+const tableObj2 = {
+personel: [
+{
+id: "fetch/editable",
+Name: "fetch/editable",
+personC: "fetch/editable",
+},
+{
+id: "fetch/editable",
+Name: "fetch/editable",
+personC: "fetch/editable",
+},
+{
+id: "fetch/editable",
+Name: "fetch/editable",
+personC: "fetch/editable",
+},
+],
+};
