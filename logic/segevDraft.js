@@ -90,3 +90,5 @@ function createButtons(personRow) {
   personRow.appendChild(buttonsContainer);
   buttonsContainer.append(buttonEdit, buttonDelete);
 }
+
+// search
