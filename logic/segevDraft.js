@@ -57,8 +57,8 @@ function drawTable(obj) {
     buttonsContainer.classList.add("buttons-container");
     buttonEdit.classList.add("edit");
     buttonDelete.classList.add("delete");
-    buttonEdit.innerText = "Edit";
-    buttonDelete.innerText = "Delete";
+    buttonEdit.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+    buttonDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
     personRow.appendChild(buttonsContainer);
     buttonsContainer.append(buttonEdit, buttonDelete);
   });
