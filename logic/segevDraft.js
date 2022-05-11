@@ -55,7 +55,12 @@ function drawTable(obj) {
       editFunc(idx);
     });
   });
-  //
+  const deleteBtns = document.querySelectorAll(".delete");
+  deleteBtns.forEach((edit, idx) => {
+    edit.addEventListener("click", () => {
+      deleteFunc(idx, tableObj.personnel);
+    });
+  });
 }
 
 //! need to improve the Enter eventlistner
@@ -67,6 +72,12 @@ async function editFunc(idx) {
       if (e.key === "Enter") cell.disabled = true;
     });
   });
+}
+
+async function deleteFunc(idx, arr) {
+  const rowContainers = document.querySelectorAll(".row");
+  arr.splice(idx, 1);
+  rowContainers[idx].style.display = "none";
 }
 
 // functions for drawCards
@@ -111,31 +122,36 @@ async function searchByInput(arrOfPeople, input) {
       }
     }
   });
-
   innerHtmlTitles(matchObj.personnel);
   drawTable(matchObj);
+  // todo : we need to fix when search - sort will not work due to inner HTML
+  // sortByClick(matchObj, false);
 }
 
 // ==========innerHtml func for title===============
 function innerHtmlTitles(arr) {
-  if (arr.length > 0) {
-    document.querySelector(".table-container").innerHTML = `
-  <div class="category-row">
-          <button class="category-btn name">First Name</button>
-          <button class="category-btn name">Last Name</button>
-          <button class="category-btn id">Id</button>
-          <button class="category-btn hobby">Hobby</button>
-          <button class="category-btn age">Age</button>
-          <button class="category-btn city">City</button>
-          <button class="category-btn gender">Gender</button>
-          <button class="category-btn capsule">Capsule</button>
-          
-          <div class="buttons-container"></div>
-        </div>
-  `;
-  } else {
-    document.querySelector(".table-container").innerHTML = "NOT FOUND!";
-  }
+  // if (arr.length > 0) {
+  //   document.querySelector(".table-container").innerHTML = `
+  // <div class="category-row">
+  //         <button class="category-btn name">First Name</button>
+  //         <button class="category-btn name">Last Name</button>
+  //         <button class="category-btn id">Id</button>
+  //         <button class="category-btn hobby">Hobby</button>
+  //         <button class="category-btn age">Age</button>
+  //         <button class="category-btn city">City</button>
+  //         <button class="category-btn gender">Gender</button>
+  //         <button class="category-btn capsule">Capsule</button>
+
+  //         <div class="buttons-container"></div>
+  //       </div>
+  // `;
+  // } else {
+  //   document.querySelector(".table-container").innerHTML = "NOT FOUND!";
+  // }
+  document.querySelectorAll(".row").forEach((row) => {
+    row.classList.remove("row");
+    row.innerHTML = "";
+  });
 }
 
 // =============================
@@ -164,12 +180,13 @@ tableObj.sortStr = function (byStr) {
 };
 
 // !
-function sortByClick(obj) {
+
+function sortByClick(obj, bool) {
   const sortButtons = document.querySelectorAll(".category-btn");
 
   sortButtons.forEach((btn, idx) => {
     btn.addEventListener("click", (e) => {
-      console.log("Before sort:", tableObj.personnel);
+      // console.log("Before sort:", tableObj.personnel);
       const getAtt = btn.getAttribute("data");
       if ([0, 1, 3, 5, 6].includes(idx)) {
         obj.sortStr(getAtt);
@@ -177,30 +194,34 @@ function sortByClick(obj) {
       } else {
         obj.sortNum(getAtt);
       }
-      innerHtmlTitles(obj.personnel);
-      drawTable(obj);
-      console.log("after sort:", obj.personnel);
+      document.querySelectorAll(".row").forEach((row) => {
+        row.classList.remove("row");
+        row.innerHTML = "";
+      });
+      if (bool) drawTable(obj);
+      // console.log("after sort:", obj.personnel);
     });
   });
 }
 
-// sortByClick(tableObj);
+sortByClick(tableObj, true);
 // !
-const sortButtons = document.querySelectorAll(".category-btn");
 
-sortButtons.forEach((btn, idx) => {
-  btn.addEventListener("click", (e) => {
-    // console.log("Before sort:", tableObj.personnel);
-    const getAtt = btn.getAttribute("data");
-    if ([0, 1, 3, 5, 6].includes(idx)) {
-      tableObj.sortStr(getAtt);
-      console.log(getAtt);
-    } else {
-      tableObj.sortNum(getAtt);
-    }
-    innerHtmlTitles(tableObj.personnel);
-    drawTable(tableObj);
-    console.log("xxx");
-    // console.log("after sort:", tableObj.personnel);
-  });
-});
+// sortButtons.forEach((btn, idx) => {
+//   btn.addEventListener("click", (e) => {
+//     const getAtt = btn.getAttribute("data");
+//     if ([0, 1, 3, 5, 6].includes(idx)) {
+//       tableObj.sortStr(getAtt);
+//       console.log(getAtt);
+//     } else {
+//       tableObj.sortNum(getAtt);
+//     }
+
+//     document.querySelectorAll(".row").forEach((row) => {
+//       row.classList.remove("row");
+//       row.innerHTML = "";
+//     });
+//     drawTable(tableObj);
+//     console.log("xxx");
+//   });
+// });
