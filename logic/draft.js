@@ -28,7 +28,7 @@ async function pushDataToObject(obj, url1, url2) {
     i++;
   }
   obj.personnel = allPersonArr;
-  // console.log(obj.personnel);
+  console.log(obj.personnel);
 }
 
 pushDataToObject(tableObj, urlAll, urlPerson);

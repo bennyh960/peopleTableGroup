@@ -1,3 +1,60 @@
 * {
   box-sizing: border-box;
 }
+
+body{
+  height: 100vh;
+  width: 100vw;
+}
+.main-container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.table-container{
+  width: 90%;
+  height: 90%;
+  margin:auto;
+  background-color: rgb(46, 100, 217);
+}
+.row{
+  display: flex;
+  width: 80%;
+  height: 3%;
+  align-items: center;
+  justify-content: center;
+}
+.buttons-container {
+  display: flex;
+  height: 100%;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+}
+.delete{
+  background-color: purple;
+  height: 80%;
+  width: 40%;
+}
+.edit{
+  background-color: rgb(29, 71, 197);
+  height: 80%;
+  width: 40%;
+}
+.table-cell{
+  background-color: transparent;
+  border: solid 1px;
+  color: black;
+  text-align: center;
+  width: 60px;
+}
+.category-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ /* needs to be laighned */
+}
+.category-btn {
+  background: transparent;
+  width: 60px;
+}
