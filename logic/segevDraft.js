@@ -43,24 +43,9 @@ function drawTable(obj) {
     personRow.classList.add("row");
     tableContainer.appendChild(personRow);
     // create inputs
-    for (let i = 0; i < Math.min(8, Object.keys(person).length); i++) {
-      const tableCell = document.createElement("input");
-      tableCell.value = person[Object.keys(person)[i]];
-      tableCell.disabled = true;
-      tableCell.classList.add("table-cell");
-      personRow.appendChild(tableCell);
-    }
+    createInputs(person, idx, personRow)
     // create btn
-    const buttonsContainer = document.createElement("div");
-    const buttonEdit = document.createElement("button");
-    const buttonDelete = document.createElement("button");
-    buttonsContainer.classList.add("buttons-container");
-    buttonEdit.classList.add("edit");
-    buttonDelete.classList.add("delete");
-    buttonEdit.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-    buttonDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
-    personRow.appendChild(buttonsContainer);
-    buttonsContainer.append(buttonEdit, buttonDelete);
+    createButtons(personRow)
   });
   const editBtns = document.querySelectorAll(".edit");
   editBtns.forEach((edit, idx) => {
@@ -79,4 +64,29 @@ async function editFunc(idx) {
       if (e.key === "Enter") cell.disabled = true;
     });
   });
+}
+
+// functions for drawCards
+// create cards
+function createInputs(person,idx, personRow) {
+  for (let i = 0; i < Math.min(8, Object.keys(person).length); i++) {
+    const tableCell = document.createElement("input");
+    tableCell.value = person[Object.keys(person)[i]];
+    tableCell.disabled = true;
+    tableCell.classList.add("table-cell");
+    personRow.appendChild(tableCell);
+  }
+}
+//  create btns
+function createButtons(personRow) {
+  const buttonsContainer = document.createElement("div");
+  const buttonEdit = document.createElement("button");
+  const buttonDelete = document.createElement("button");
+  buttonsContainer.classList.add("buttons-container");
+  buttonEdit.classList.add("edit");
+  buttonDelete.classList.add("delete");
+  buttonEdit.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+  buttonDelete.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+  personRow.appendChild(buttonsContainer);
+  buttonsContainer.append(buttonEdit, buttonDelete);
 }
