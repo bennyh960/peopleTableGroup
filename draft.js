@@ -14,3 +14,5 @@ const url = "https://capsules-asb6.herokuapp.com/api/teacher/mordi";
 const arr = ["חיים", "בנא", "שגב"];
 arr.sort();
 console.log(arr);
+
+// segev
