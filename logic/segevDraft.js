@@ -1,3 +1,4 @@
+// import { x } from "./draft.js";
 //url of all person and individual
 const urlAll = "https://capsules-asb6.herokuapp.com/api/teacher/mordi";
 const urlPerson = `https://capsules-asb6.herokuapp.com/api/user/`;
@@ -38,7 +39,6 @@ pushDataToObject(tableObj, urlAll, urlPerson).then(() => {
 function drawTable(obj) {
   const tableContainer = document.querySelector(".table-container");
 
-  tableObj.sortStr("firstName");
   obj.personnel.forEach((person, idx) => {
     // create rows
     const personRow = document.createElement("div");
@@ -111,23 +111,36 @@ async function searchByInput(arrOfPeople, input) {
       }
     }
   });
-  // console.log(matchObj.personnel);
-  document.querySelector(".table-container").innerHTML = `
+
+  innerHtmlTitles(matchObj.personnel);
+  drawTable(matchObj);
+}
+
+// ==========innerHtml func for title===============
+function innerHtmlTitles(arr) {
+  if (arr.length > 0) {
+    document.querySelector(".table-container").innerHTML = `
   <div class="category-row">
           <button class="category-btn name">First Name</button>
           <button class="category-btn name">Last Name</button>
           <button class="category-btn id">Id</button>
-          <button class="category-btn capsule">Capsule</button>
+          <button class="category-btn hobby">Hobby</button>
           <button class="category-btn age">Age</button>
           <button class="category-btn city">City</button>
           <button class="category-btn gender">Gender</button>
-          <button class="category-btn hobby">Hobby</button>
+          <button class="category-btn capsule">Capsule</button>
+          
           <div class="buttons-container"></div>
         </div>
   `;
-  drawTable(matchObj);
+  } else {
+    document.querySelector(".table-container").innerHTML = "NOT FOUND!";
+  }
 }
 
+// =============================
+
+// ?SORTING
 //by number
 tableObj.sortNum = function (byX) {
   this.personnel.sort((a, b) => {
@@ -149,3 +162,45 @@ tableObj.sortStr = function (byStr) {
     return 0;
   });
 };
+
+// !
+function sortByClick(obj) {
+  const sortButtons = document.querySelectorAll(".category-btn");
+
+  sortButtons.forEach((btn, idx) => {
+    btn.addEventListener("click", (e) => {
+      console.log("Before sort:", tableObj.personnel);
+      const getAtt = btn.getAttribute("data");
+      if ([0, 1, 3, 5, 6].includes(idx)) {
+        obj.sortStr(getAtt);
+        console.log(getAtt);
+      } else {
+        obj.sortNum(getAtt);
+      }
+      innerHtmlTitles(obj.personnel);
+      drawTable(obj);
+      console.log("after sort:", obj.personnel);
+    });
+  });
+}
+
+// sortByClick(tableObj);
+// !
+const sortButtons = document.querySelectorAll(".category-btn");
+
+sortButtons.forEach((btn, idx) => {
+  btn.addEventListener("click", (e) => {
+    // console.log("Before sort:", tableObj.personnel);
+    const getAtt = btn.getAttribute("data");
+    if ([0, 1, 3, 5, 6].includes(idx)) {
+      tableObj.sortStr(getAtt);
+      console.log(getAtt);
+    } else {
+      tableObj.sortNum(getAtt);
+    }
+    innerHtmlTitles(tableObj.personnel);
+    drawTable(tableObj);
+    console.log("xxx");
+    // console.log("after sort:", tableObj.personnel);
+  });
+});

@@ -4,31 +4,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <title>Students{ }</title>
   </head>
   <body>
-
     <div class="main-container">
-        <div class="navbar">
-          <div class="nav-list">
-            <div class="nav-item logo">Students{ }</div>
-            <div class="nav-item"> Search:
-              <input class="searchbar" type="text">
-            </div>
-            <div class="nav-item">Sort:</div>
+      <div class="navbar">
+        <div class="nav-list">
+          <div class="nav-item logo">Students{ }</div>
+          <div class="nav-item">
+            Search:
+            <input class="searchbar" type="text" />
+          </div>
+          <div class="nav-item">
+            <label>Search By:</label>
+            <select>
+              <option value="all">All</option>
+              <option value="firstName">First Name</option>
+              <option value="lastName">Last Name</option>
+              <option value="id">Id</option>
+              <option value="age">Age</option>
+              <option value="city">City</option>
+              <option value="gender">Gender</option>
+              <option value="hobby">Hobby</option>
+            </select>
           </div>
         </div>
+      </div>
       <div class="table-container">
         <div class="category-row">
-          <button class="category-btn name">First Name</button>
-          <button class="category-btn name">Last Name</button>
-          <button class="category-btn id">Id</button>
-          <button class="category-btn capsule">Capsule</button>
-          <button class="category-btn age">Age</button>
-          <button class="category-btn city">City</button>
-          <button class="category-btn gender">Gender</button>
-          <button class="category-btn hobby">Hobby</button>
+          <button class="category-btn" data="firstName">First Name</button>
+          <button class="category-btn" data="lastName">Last Name</button>
+          <button class="category-btn" data="id">Id</button>
+          <button class="category-btn" data="hobby">Hobby</button>
+          <button class="category-btn" data="age">Age</button>
+          <button class="category-btn" data="city">City</button>
+          <button class="category-btn" data="gender">Gender</button>
+          <button class="category-btn" data="capsule">Capsule</button>
           <div class="buttons-container"></div>
         </div>
       </div>
@@ -36,8 +48,7 @@
     <!-- <script src="./logic/app.js" type="module"></script> -->
     <!-- <script src="./logic/draft.js" type="module"></script> -->
     <!-- for now -->
-    <script src="./logic/segevDraft.js" type="module"></script> 
+    <script src="./logic/segevDraft.js" type="module"></script>
     <script src="https://kit.fontawesome.com/4ae8c9c393.js" crossorigin="anonymous"></script>
-
   </body>
 </html>
