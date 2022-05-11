@@ -37,6 +37,8 @@ pushDataToObject(tableObj, urlAll, urlPerson).then(() => {
 
 function drawTable(obj) {
   const tableContainer = document.querySelector(".table-container");
+  
+  tableObj.sortStr('firstName')
   obj.personnel.forEach((person, idx) => {
     // create rows
     const personRow = document.createElement("div");
@@ -53,6 +55,7 @@ function drawTable(obj) {
       editFunc(idx);
     });
   });
+  // 
 }
 
 //! need to improve the Enter eventlistner
@@ -92,3 +95,58 @@ function createButtons(personRow) {
 }
 
 // search
+const searchbarInput = document.querySelector('.searchbar')
+searchbarInput.addEventListener('input',async (e)=>{
+  await searchByInput(tableObj.personnel ,e.target.value)
+})
+
+async function searchByInput(arrOfPeople, input) {
+  const matchObj = {
+    personnel :[]
+  }
+  arrOfPeople.forEach((person)=>{
+    for (const property in person) {
+      if(person[property].toString().includes(input)){
+        if(!matchObj.personnel.includes(person))
+        matchObj.personnel.push(person)
+      } 
+    }
+  })
+  // console.log(matchObj.personnel);
+  document.querySelector('.table-container').innerHTML=`
+  <div class="category-row">
+          <button class="category-btn name">First Name</button>
+          <button class="category-btn name">Last Name</button>
+          <button class="category-btn id">Id</button>
+          <button class="category-btn capsule">Capsule</button>
+          <button class="category-btn age">Age</button>
+          <button class="category-btn city">City</button>
+          <button class="category-btn gender">Gender</button>
+          <button class="category-btn hobby">Hobby</button>
+          <div class="buttons-container"></div>
+        </div>
+  `;
+  drawTable(matchObj)
+}
+
+//by number
+tableObj.sortNum = function (byX) {
+  this.personnel.sort((a, b) => {
+    return a[byX] - b[byX];
+  });
+};
+//by string
+tableObj.sortStr = function (byStr) {
+  this.personnel.sort((a, b) => {
+    let fa = a[byStr].toLowerCase(),
+      fb = b[byStr].toLowerCase();
+
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  });
+};
