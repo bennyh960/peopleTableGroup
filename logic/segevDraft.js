@@ -37,17 +37,17 @@ pushDataToObject(tableObj, urlAll, urlPerson).then(() => {
 
 function drawTable(obj) {
   const tableContainer = document.querySelector(".table-container");
-  
-  tableObj.sortStr('firstName')
+
+  tableObj.sortStr("firstName");
   obj.personnel.forEach((person, idx) => {
     // create rows
     const personRow = document.createElement("div");
     personRow.classList.add("row");
     tableContainer.appendChild(personRow);
     // create inputs
-    createInputs(person, idx, personRow)
+    createInputs(person, idx, personRow);
     // create btn
-    createButtons(personRow)
+    createButtons(personRow);
   });
   const editBtns = document.querySelectorAll(".edit");
   editBtns.forEach((edit, idx) => {
@@ -55,7 +55,7 @@ function drawTable(obj) {
       editFunc(idx);
     });
   });
-  // 
+  //
 }
 
 //! need to improve the Enter eventlistner
@@ -71,7 +71,7 @@ async function editFunc(idx) {
 
 // functions for drawCards
 // create cards
-function createInputs(person,idx, personRow) {
+function createInputs(person, idx, personRow) {
   for (let i = 0; i < Math.min(8, Object.keys(person).length); i++) {
     const tableCell = document.createElement("input");
     tableCell.value = person[Object.keys(person)[i]];
@@ -95,25 +95,24 @@ function createButtons(personRow) {
 }
 
 // search
-const searchbarInput = document.querySelector('.searchbar')
-searchbarInput.addEventListener('input',async (e)=>{
-  await searchByInput(tableObj.personnel ,e.target.value)
-})
+const searchbarInput = document.querySelector(".searchbar");
+searchbarInput.addEventListener("input", async (e) => {
+  await searchByInput(tableObj.personnel, e.target.value);
+});
 
 async function searchByInput(arrOfPeople, input) {
   const matchObj = {
-    personnel :[]
-  }
-  arrOfPeople.forEach((person)=>{
+    personnel: [],
+  };
+  arrOfPeople.forEach((person) => {
     for (const property in person) {
-      if(person[property].toString().includes(input)){
-        if(!matchObj.personnel.includes(person))
-        matchObj.personnel.push(person)
-      } 
+      if (person[property].toString().includes(input)) {
+        if (!matchObj.personnel.includes(person)) matchObj.personnel.push(person);
+      }
     }
-  })
+  });
   // console.log(matchObj.personnel);
-  document.querySelector('.table-container').innerHTML=`
+  document.querySelector(".table-container").innerHTML = `
   <div class="category-row">
           <button class="category-btn name">First Name</button>
           <button class="category-btn name">Last Name</button>
@@ -126,7 +125,7 @@ async function searchByInput(arrOfPeople, input) {
           <div class="buttons-container"></div>
         </div>
   `;
-  drawTable(matchObj)
+  drawTable(matchObj);
 }
 
 //by number
