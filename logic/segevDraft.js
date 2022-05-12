@@ -206,22 +206,13 @@ function sortByClick(obj, bool) {
 
 sortByClick(tableObj, true);
 // !
-
-// sortButtons.forEach((btn, idx) => {
-//   btn.addEventListener("click", (e) => {
-//     const getAtt = btn.getAttribute("data");
-//     if ([0, 1, 3, 5, 6].includes(idx)) {
-//       tableObj.sortStr(getAtt);
-//       console.log(getAtt);
-//     } else {
-//       tableObj.sortNum(getAtt);
-//     }
-
-//     document.querySelectorAll(".row").forEach((row) => {
-//       row.classList.remove("row");
-//       row.innerHTML = "";
-//     });
-//     drawTable(tableObj);
-//     console.log("xxx");
-//   });
-// });
+const title = document.querySelector(".category-row");
+title.style.display = "none";
+function hideLoading() {
+  const loading = document.querySelector(".lds-spinner");
+  setTimeout(() => {
+    loading.style.display = "none";
+    title.style.display = "flex";
+  }, 1100);
+}
+hideLoading();
