@@ -38,12 +38,3 @@ sortButtons.forEach((btn, idx) => {
     }
   });
 });
-// sortButtons[0].addEventListener("click", () => {
-//   tableObj.sortStr("firstName");
-// });
-// sortButtons[1].addEventListener("click", () => {
-//   tableObj.sortStr("lastName");
-// });
-// sortButtons[2].addEventListener("click", () => {
-//   tableObj.sortNum("id");
-// });
