@@ -63,21 +63,55 @@ function drawTable(obj) {
   });
 }
 
+const storeData = {
+  rowStored: [],
+  bool: true,
+  idx: "",
+};
 //! need to improve the Enter eventlistner
 async function editFunc(idx) {
+  storeData.rowStored = [];
   const rowContainers = document.querySelectorAll(".row");
   [...rowContainers[idx].children].forEach((cell) => {
     cell.disabled = false;
+    // cell.style.background = "white";
+    storeData.rowStored.push(cell.value);
+    storeData.idx = idx;
     document.addEventListener("keypress", (e) => {
       if (e.key === "Enter") cell.disabled = true;
     });
   });
+
+  //todo : fix logic and build in func
+  storeData.bool = false;
+  const editCancle = document.querySelectorAll(".edit")[idx];
+  const editConfirm = document.querySelectorAll(".delete")[idx];
+  editCancle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  editConfirm.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+  editConfirm.addEventListener("click", () => {
+    editCancle.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+    editConfirm.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+    storeData.bool = true;
+  });
+  editCancle.addEventListener("click", () => {
+    editCancle.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
+    editConfirm.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+    storeData.bool = true;
+    [...rowContainers[idx].children].forEach((cell, idx) => {
+      cell.value = storeData.rowStored[idx];
+    });
+  });
+
+  console.log(storeData);
 }
 
 async function deleteFunc(idx, arr) {
-  const rowContainers = document.querySelectorAll(".row");
-  arr.splice(idx, 1);
-  rowContainers[idx].style.display = "none";
+  if (storeData.bool) {
+    const rowContainers = document.querySelectorAll(".row");
+    arr.splice(idx, 1);
+    rowContainers[idx].style.display = "none";
+  }
 }
 
 // functions for drawCards
